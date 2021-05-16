@@ -1,9 +1,8 @@
 import java.util.concurrent.RecursiveAction;
-
 import java.util.Arrays;
 
 public class QuicksortThread extends RecursiveAction{
-	private int[] arr;
+	  private int[] arr;
 	  private int low;
 	  private int high;
 	  
@@ -12,7 +11,6 @@ public class QuicksortThread extends RecursiveAction{
 	    this.low = low;
 	    this.high = high;
 	  }
-
 
 	  @Override
 	  protected void compute() {
@@ -48,7 +46,6 @@ public class QuicksortThread extends RecursiveAction{
 	    }
 	    return j;
 	  }
-
  
 	}
 
