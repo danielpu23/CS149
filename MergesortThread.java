@@ -13,12 +13,12 @@ public class MergesortThread extends RecursiveAction {
     }
 
     public void compute() {
-    	int size = high - low;
-    	if (size <= 100) {
+    	int size = high - low; 
+    	if (size <= 100) {  // if array size is less than 100 then use Array's sort
     		Arrays.sort(array, low, high);
 	    }
     	else {
-    		int mid = low + (size/2);
+    		int mid = low + (size/2); // find the midpoint to split the array
     		MergesortThread left = new MergesortThread(array, low, mid);
     		MergesortThread right = new MergesortThread(array, mid, high);
     		invokeAll(left, right);
@@ -41,6 +41,5 @@ public class MergesortThread extends RecursiveAction {
     			array[i] = copy[k++];
 	    }
 	  }
-    }
-       
+    }      
 }
