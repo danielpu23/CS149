@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.concurrent.RecursiveAction;
 
 public class MergesortThread extends RecursiveAction {
-	private final int[] array;
+    private final int[] array;
     private final int low;
     private final int high;
 
