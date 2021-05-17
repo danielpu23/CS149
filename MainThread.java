@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.concurrent.ForkJoinPool;
 
 public class MainThread {
@@ -59,16 +60,16 @@ public class MainThread {
 
 	public void compute() {
 		
-		if(mergeArr.length <= 100) { // if mergesort array is small enough, just use insertion sort
-			insertionSort(mergeArr);
+		if(mergeArr.length <= 100) { // if mergesort array is small enough, just use arrays sort
+			Arrays.sort(mergeArr);
 		}
 		else if(mergeArr.length > 100) { // if mergesort thread is greater than 100, then invoke mergesort thread
 			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
 			MergesortThread m = new MergesortThread(mergeArr, 0, mergeArr.length);
 			forkJoinPool.invoke(m);
 		}
-		if(quickArr.length<= 100) { // if quicksort array is small enough, just use insertion sort
-				insertionSort(quickArr);
+		if(quickArr.length<= 100) { // if quicksort array is small enough, just use arrays sort
+				Arrays.sort(quickArr);
 		}
 		else if (quickArr.length > 100) { // if quicksort array is greater than 100, then invoke quicksort thread
 			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
@@ -77,19 +78,6 @@ public class MainThread {
 		}
 	}
 		
-	public void insertionSort(int arr[]) // insertion sort algorithm
-    {
-        int n = arr.length;
-        for (int i = 1; i < n; i++) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
-            }
-            arr[j + 1] = key;
-        }
-    }
 	public int [] getMergeArr() { // getters
 		return mergeArr;
 	}
