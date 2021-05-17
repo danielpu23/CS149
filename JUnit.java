@@ -74,15 +74,6 @@ public class JUnit {
     
     // Main Thread tests
     @Test
-    public void testInsertionsort() { // check if main thread's insertion sort successfully sorts the array
-    	int [] testArray = {1, 8, 9, 5, 12, 3, 4};
-    	m.insertionSort(testArray);
-    	int [] expectedArray = {1, 3, 4, 5, 8, 9, 12};
-    	boolean arrayEquals = Arrays.equals(testArray, expectedArray);
-    	assertTrue(arrayEquals);
-    }
-    
-    @Test
   	public void testMainMergesort() { // check if elements are sorted by mergesort after executing thread
   		m.compute();
   		boolean inOrder = true;
