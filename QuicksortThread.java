@@ -13,7 +13,7 @@ public class QuicksortThread extends RecursiveAction{
 
 	  @Override
 	  protected void compute() {
-		if (array.length <= 100) {     // use insertion sort if array is small enough
+		if (high-low <= 100) {     // use insertion sort if array is small enough
 			insertionSortRange(array);
 		}
 	    if(low < high){ 
