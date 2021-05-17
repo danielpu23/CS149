@@ -50,7 +50,7 @@ public class MergesortThread extends RecursiveAction {
         }
     }
     void insertionSortRange(int arr[]) { // insertion sort algorithm for a certain range
-        for (int i = low+1; i < high; ++i) {
+        for (int i = low+1; i < high; i++) {
             int key = arr[i];
             int j = i - 1;
             while (j >= low && arr[j] > key) {
