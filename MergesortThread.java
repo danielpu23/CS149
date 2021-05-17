@@ -1,8 +1,8 @@
-import java.util.Arrays;
+
 import java.util.concurrent.RecursiveAction;
 
 public class MergesortThread extends RecursiveAction {
-    private final int[] array;
+	private final int[] array;
     private final int low;
     private final int high;
 
@@ -14,8 +14,8 @@ public class MergesortThread extends RecursiveAction {
 
     public void compute() {
     	int size = high - low; 
-    	if (size <= 100) {  // if array size is less than 100 then use Array's sort
-    		Arrays.sort(array, low, high);
+    	if (size <= 100) {  // if array size is less than 100 then use insertion sort
+    		insertionSortRange(array);
 	    }
     	else {
     		int mid = low + (size/2); // find the midpoint to split the array
@@ -49,5 +49,16 @@ public class MergesortThread extends RecursiveAction {
             }
         }
     }
-       
+    void insertionSortRange(int arr[]) { // insertion sort algorithm for a certain range
+        for (int i = low+1; i < high; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= low && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+    
 }
