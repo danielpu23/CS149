@@ -1,51 +1,62 @@
 import java.util.concurrent.RecursiveAction;
-import java.util.Arrays;
 
 public class QuicksortThread extends RecursiveAction{
-	  private int[] arr;
+	  private int[] array;
 	  private int low;
 	  private int high;
 	  
-	  public QuicksortThread(int[] arr, int low, int high) { // constructor
-	    this.arr = arr;
+	  public QuicksortThread(int[] array, int low, int high) { // constructor
+	    this.array = array;
 	    this.low = low;
 	    this.high = high;
 	  }
 
 	  @Override
 	  protected void compute() {
-		if (arr.length <= 100) {     // use Array sort if the array is small enough
-			Arrays.sort(arr, low, high);
+		if (array.length <= 100) {     // use insertion sort if array is small enough
+			insertionSortRange(array);
 		}
 	    if(low < high){ 
-	      int pivot = partition(arr, low, high); // find the pivot
-	      QuicksortThread leftPartition = new QuicksortThread(arr,low, pivot);
-	      QuicksortThread rightPartition =  new QuicksortThread(arr, pivot + 1, high);
+	      int pivot = partition(array, low, high); // find the pivot
+	      QuicksortThread leftPartition = new QuicksortThread(array,low, pivot);
+	      QuicksortThread rightPartition =  new QuicksortThread(array, pivot + 1, high);
 	      invokeAll(leftPartition, rightPartition);
 	    }
 	  }
 
-	  public int partition(int[] array, int low, int high) { // partition method of quicksort
-		  int pivot = array[low]; 
+	  public int partition(int[] arrayay, int low, int high) { // partition method of quicksort
+		  int pivot = arrayay[low]; 
 		  int i = low - 1;
 		  int j  = high + 1;
 		  while (i < j){
 			  do {
 				  i++;
 			  }
-			  while (array[i] < pivot);
+			  while (arrayay[i] < pivot);
 			  do {
 			  	  j--;
 			  }
-			  while (array[j] > pivot);
+			  while (arrayay[j] > pivot);
 			  if (i < j) {
-				  int temp = arr[i];
-				  arr[i] = arr[j];
-				  arr[j] = temp;
+				  int temp = array[i];
+				  array[i] = array[j];
+				  array[j] = temp;
 	      }
 	    }
 	    return j;
 	  }
+	  
+	    public void insertionSortRange(int arr[]) { // insertion sort algorithm for a certain range
+	        for (int i = low+1; i < high; ++i) {
+	            int key = arr[i];
+	            int j = i - 1;
+	            while (j >= low && arr[j] > key) {
+	                arr[j + 1] = arr[j];
+	                j = j - 1;
+	            }
+	            arr[j + 1] = key;
+	        }
+	    }
  
 	}
 
