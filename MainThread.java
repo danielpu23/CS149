@@ -11,6 +11,56 @@ public class MainThread {
 		this.quickArr = quickArr;
 	}
 	
+	public void compute() {
+		
+		if(mergeArr.length <= 100) { // if mergesort array is small enough, just use arrays sort
+			Arrays.sort(mergeArr);
+		}
+		else if(mergeArr.length > 100) { // if mergesort thread is greater than 100, then invoke mergesort thread
+			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
+			MergesortThread m = new MergesortThread(mergeArr, 0, mergeArr.length);
+			forkJoinPool.invoke(m);
+		}
+		if(quickArr.length<= 100) { // if quicksort array is small enough, just use arrays sort
+				Arrays.sort(quickArr);
+		}
+		else if (quickArr.length > 100) { // if quicksort array is greater than 100, then invoke quicksort thread
+			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
+			QuicksortThread q = new QuicksortThread(quickArr, 0, quickArr.length-1);
+			forkJoinPool.invoke(q);
+		}
+	}
+	
+	public void insertionSort(int arr[]) { // insertion sort algorithm
+        int n = arr.length;
+        for (int i = 1; i < n; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+		
+	public void printArray(int [] arr) {  // print the array
+		
+		for(int i = 0; i<arr.length; i++) {
+			if(i % 10 == 0) {
+				System.out.print("\n");
+			}
+			System.out.print(arr[i]+" ");
+		}
+	}
+
+	public int [] getMergeArr() { // getters
+		return mergeArr;
+	}
+	public int [] getQuickArr() {
+		return quickArr;
+	}
+
 	public static void main(String [] args) {
 		int [] arr = {1, 8, 4, 7}; // control
 		System.out.print("First Array Before Sorting Contains: ");
@@ -46,43 +96,6 @@ public class MainThread {
 		System.out.println("Second Array After Sorting Using Quicksort Contains: ");
 		t2.printArray(arr2Copy);
 		
-	}
-	
-	public void printArray(int [] arr) {  // print the array
-	
-		for(int i = 0; i<arr.length; i++) {
-			if(i % 10 == 0) {
-				System.out.print("\n");
-			}
-			System.out.print(arr[i]+" ");
-		}
-	}
-
-	public void compute() {
-		
-		if(mergeArr.length <= 100) { // if mergesort array is small enough, just use arrays sort
-			Arrays.sort(mergeArr);
-		}
-		else if(mergeArr.length > 100) { // if mergesort thread is greater than 100, then invoke mergesort thread
-			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
-			MergesortThread m = new MergesortThread(mergeArr, 0, mergeArr.length);
-			forkJoinPool.invoke(m);
-		}
-		if(quickArr.length<= 100) { // if quicksort array is small enough, just use arrays sort
-				Arrays.sort(quickArr);
-		}
-		else if (quickArr.length > 100) { // if quicksort array is greater than 100, then invoke quicksort thread
-			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
-			QuicksortThread q = new QuicksortThread(quickArr, 0, quickArr.length-1);
-			forkJoinPool.invoke(q);
-		}
-	}
-		
-	public int [] getMergeArr() { // getters
-		return mergeArr;
-	}
-	public int [] getQuickArr() {
-		return quickArr;
 	}
 	
 }
