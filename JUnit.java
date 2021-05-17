@@ -54,7 +54,7 @@ public class JUnit {
     	int pivot = quick.partition(testArray, 0, testArray.length-1);
     	int expectedPivot = 1;
     	boolean arrayEquals = Arrays.equals(testArray, expectedArray);
-    	assertTrue(pivot == 1 && arrayEquals );
+    	assertTrue(pivot == expectedPivot && arrayEquals );
     }
     @Test
     public void testQuicksort() { // check if quicksort successfully sorts the array
