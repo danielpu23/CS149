@@ -1,5 +1,4 @@
 
-import java.util.Arrays;
 import java.util.concurrent.ForkJoinPool;
 
 public class MainThread {
@@ -13,15 +12,15 @@ public class MainThread {
 	
 	public void compute() {
 		ForkJoinPool forkJoinPool = ForkJoinPool.commonPool(); 
-		if(mergeArr.length <= 100) { // if mergesort array is small enough, just use arrays sort
-			Arrays.sort(mergeArr);
+		if(mergeArr.length <= 100) { // if mergesort array is small enough, just use insertion sort
+			insertionSort(mergeArr);
 		}
 		else if(mergeArr.length > 100) { // if mergesort thread is greater than 100, then invoke mergesort thread
 			MergesortThread m = new MergesortThread(mergeArr, 0, mergeArr.length);
 			forkJoinPool.invoke(m);
 		}
-		if(quickArr.length<= 100) { // if quicksort array is small enough, just use arrays sort
-				Arrays.sort(quickArr);
+		if(quickArr.length<= 100) { // if quicksort array is small enough, just use insertion sort
+			insertionSort(quickArr);
 		}
 		else if (quickArr.length > 100) { // if quicksort array is greater than 100, then invoke quicksort thread
 			QuicksortThread q = new QuicksortThread(quickArr, 0, quickArr.length-1);
