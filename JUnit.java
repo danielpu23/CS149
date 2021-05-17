@@ -71,8 +71,30 @@ public class JUnit {
     	boolean arrayEquals = Arrays.equals(testArray, expectedArray);
     	assertTrue(arrayEquals);    	
     }
+    // Test the ranged insertion sort for both Mergesort and Quicksort threads (they are exactly the same)
+    @Test
+    public void testInsertionsortRange() {
+    	int [] testArray = {3, 1, 8, 2, 9, 4};
+    	int [] testArrayCopy = {3, 1, 8, 2, 9, 4};
+    	int [] expectedArray = {1, 3, 8, 2, 9, 4};
+    	MergesortThread merge = new MergesortThread(testArray, 0, 2); // only test a small range for both
+    	QuicksortThread quick = new QuicksortThread(testArrayCopy, 0, 2);
+    	merge.insertionSortRange(testArray);
+    	quick.insertionSortRange(testArrayCopy);
+    	boolean arrayEquals = Arrays.equals(testArray, expectedArray);
+    	boolean arrayEquals2 = Arrays.equals(testArrayCopy, expectedArray);
+    	assertTrue(arrayEquals && arrayEquals2);
+    }
     
     // Main Thread tests
+    @Test
+    public void testInsertionsort() {
+    	int [] testArray = {1, 2, 8, 4, 3, 9};
+    	int [] expectedArray = {1, 2, 3, 4, 8, 9};
+    	m.insertionSort(testArray);
+    	boolean arrayEquals = Arrays.equals(testArray, expectedArray);
+    	assertTrue(arrayEquals);   	
+    }
     @Test
   	public void testMainMergesort() { // check if elements are sorted by mergesort after executing thread
   		m.compute();
