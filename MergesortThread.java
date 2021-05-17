@@ -25,21 +25,29 @@ public class MergesortThread extends RecursiveAction {
     		merge(mid);
     	}
     }
-
-    public void merge(int mid) { // merge part of mergesort
-    	int lowerMid = high - low;
-    	int higherMid = mid - low;
-    	int[] copy = new int[lowerMid];
-    	System.arraycopy(array, low, copy, 0, copy.length);
-    	int j = 0;
-    	int k = higherMid;
-    	for (int i = low; i < high; i++) {
-    		if (k >= lowerMid || (j < higherMid && copy[j] < copy[k])) {
-    			array[i] = copy[j++];
-	    }
-    		else {
-    			array[i] = copy[k++];
-	    }
-	  }
-    }      
+    
+    public void merge(int mid) {// merge part of mergesort
+    
+    	int start = low; // start represents starting index of first array
+    	int start2 = mid; // start2 represents starting index of second array
+    	
+        while (start <= mid && start2 < high) {
+            if (array[start] <= array[start2]) {
+                start++;
+            }
+            else {
+                int value = array[start2];
+                int index = start2;
+                while (index != start) {
+                    array[index] = array[index - 1];
+                    index--;
+                }
+                array[start] = value;
+                start++;
+                mid++;
+                start2++;
+            }
+        }
+    }
+       
 }
