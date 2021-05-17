@@ -12,12 +12,11 @@ public class MainThread {
 	}
 	
 	public void compute() {
-		
+		ForkJoinPool forkJoinPool = ForkJoinPool.commonPool(); 
 		if(mergeArr.length <= 100) { // if mergesort array is small enough, just use arrays sort
 			Arrays.sort(mergeArr);
 		}
 		else if(mergeArr.length > 100) { // if mergesort thread is greater than 100, then invoke mergesort thread
-			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
 			MergesortThread m = new MergesortThread(mergeArr, 0, mergeArr.length);
 			forkJoinPool.invoke(m);
 		}
@@ -25,7 +24,6 @@ public class MainThread {
 				Arrays.sort(quickArr);
 		}
 		else if (quickArr.length > 100) { // if quicksort array is greater than 100, then invoke quicksort thread
-			ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
 			QuicksortThread q = new QuicksortThread(quickArr, 0, quickArr.length-1);
 			forkJoinPool.invoke(q);
 		}
