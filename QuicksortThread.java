@@ -24,19 +24,19 @@ public class QuicksortThread extends RecursiveAction{
 	    }
 	  }
 
-	  public int partition(int[] arrayay, int low, int high) { // partition method of quicksort
-		  int pivot = arrayay[low]; 
+	  public int partition(int[] array, int low, int high) { // partition method of quicksort
+		  int pivot = array[low]; 
 		  int i = low - 1;
 		  int j  = high + 1;
 		  while (i < j){
 			  do {
 				  i++;
 			  }
-			  while (arrayay[i] < pivot);
+			  while (array[i] < pivot);
 			  do {
 			  	  j--;
 			  }
-			  while (arrayay[j] > pivot);
+			  while (array[j] > pivot);
 			  if (i < j) {
 				  int temp = array[i];
 				  array[i] = array[j];
