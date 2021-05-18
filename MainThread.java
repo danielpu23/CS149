@@ -44,7 +44,7 @@ public class MainThread {
 	public void printArray(int [] arr) {  // print the array
 		
 		for(int i = 0; i<arr.length; i++) {
-			if(i % 20 == 0) { 
+			if(i % 25 == 0) { 
 				System.out.print("\n");
 			}
 			System.out.print(arr[i]+" ");
